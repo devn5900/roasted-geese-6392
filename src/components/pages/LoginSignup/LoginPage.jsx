@@ -32,7 +32,6 @@ const LoginPage = ({ isOpen, onClose }) => {
       setErr(true);
     } else {
       setErr(false);
-      console.log(singRef.current);
       setLogged(singRef.current);
       setIsAuth(true);
       onClose();
