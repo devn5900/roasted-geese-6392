@@ -1,13 +1,18 @@
-import logo from "./logo.svg";
-import "./App.css";
 import { useEffect } from "react";
 import GetData from "./API/GetData";
+import Navbar from "./components/Routes/Navbar";
+import { Box, Divider } from "@chakra-ui/react";
+import AllRoutes from "./components/Routes/AllRoutes";
+import Footer from "./components/Routes/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <GetData />
-    </div>
+    <Box>
+      <Navbar />
+      <Divider />
+      <AllRoutes />
+      <Footer />
+    </Box>
   );
 }
 
