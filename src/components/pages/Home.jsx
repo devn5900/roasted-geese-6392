@@ -7,11 +7,12 @@ import NewBook from "./NewBook";
 import NewPaperBack from "./NewPaperBack";
 import OfferInfo from "./OfferInfo";
 import Subscribe from "./Subscribe";
+import banner from "../images/banner.png";
 
 const Home = () => {
   return (
     <Box>
-      <OfferInfo />
+      <OfferInfo banner={banner} />
 
       <NavOffers msg=" Free Shipping on Orders of $40 or More" />
       <HomeCarosual />
