@@ -12,6 +12,7 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import NavbarChild from "./NavbarChild";
 import NavIcon from "./NavIcon";
 import NavInfo from "./NavInfo";
@@ -36,7 +37,10 @@ const Navbar = () => {
         {nav?.map((el, i) => {
           return (
             <Menu key={i + 1}>
-              <MenuButton trigger="hover">{el?.label}</MenuButton>
+              <Link to="/allbooks">
+                {" "}
+                <MenuButton trigger="hover">{el?.label}</MenuButton>
+              </Link>
               <Spacer />
               <Center>
                 <Divider
