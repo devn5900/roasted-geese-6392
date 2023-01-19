@@ -37,7 +37,7 @@ const Navbar = () => {
         {nav?.map((el, i) => {
           return (
             <Menu key={i + 1}>
-              <Link to="/allbooks">
+              <Link to="/allbooks?_page=1">
                 {" "}
                 <MenuButton trigger="hover">{el?.label}</MenuButton>
               </Link>
@@ -58,18 +58,16 @@ const Navbar = () => {
                 <Flex>
                   {el?.data?.map((chil, j) => {
                     return (
-                      <>
-                        <MenuOptionGroup
-                          key={j + 1}
-                          bg="gray.200"
-                          p={2}
-                          title={chil?.label}
-                        >
-                          {chil?.child?.map((childData, k) => {
-                            return <MenuItem key={k + 1}>{childData}</MenuItem>;
-                          })}
-                        </MenuOptionGroup>
-                      </>
+                      <MenuOptionGroup
+                        key={j + 1}
+                        bg="gray.200"
+                        p={2}
+                        title={chil?.label}
+                      >
+                        {chil?.child?.map((childData, k) => {
+                          return <MenuItem key={k + 1}>{childData}</MenuItem>;
+                        })}
+                      </MenuOptionGroup>
                     );
                   })}
                 </Flex>

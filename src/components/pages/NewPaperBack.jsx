@@ -42,66 +42,64 @@ const NewPaperBack = () => {
         {data &&
           data?.map((el, i) => {
             return (
-              <>
-                {" "}
-                <GridItem
-                  rowSpan={i == 0 ? 2 : 0}
-                  colSpan={i == 0 ? 2 : 1}
-                  p={2}
-                >
-                  <Box>
-                    {i !== 0 ? <Image src={el.image} fit /> : ""}
-                    {i == 0 ? (
-                      <Flex
-                        direction="column"
-                        alignItems="center"
-                        w="70%"
-                        m="auto"
-                      >
-                        <Image src={el.image} fit />
-                        <Heading size="md">{el.title}</Heading>
-                        <Text>{el.publisher}</Text>
-                        <Flex>
-                          <Icon as={FaStar} color="yellow"></Icon>
-                          <Icon as={FaStar} color="yellow"></Icon>
-                          <Icon as={FaStar} color="yellow"></Icon>
-                          <Icon as={FaStar} color="yellow"></Icon>
-                          <Icon as={FaStarHalfAlt} color="yellow"></Icon>
-                        </Flex>
-                        <Text>{el.desc.substr(0, 143)}</Text>
-                        <Button
-                          size="md"
-                          bg="#3E5962"
-                          mt={3}
-                          color="white"
-                          _hover={{
-                            bg: "white",
-                            color: "#3E5962",
-                            border: "1px solid #3E5962",
-                          }}
-                        >
-                          Add To Cart
-                        </Button>
+              <GridItem
+                key={el.id}
+                rowSpan={i == 0 ? 2 : 0}
+                colSpan={i == 0 ? 2 : 1}
+                p={2}
+              >
+                <Box>
+                  {i !== 0 ? <Image src={el.image} fit /> : ""}
+                  {i == 0 ? (
+                    <Flex
+                      direction="column"
+                      alignItems="center"
+                      w="70%"
+                      m="auto"
+                    >
+                      <Image src={el.image} fit />
+                      <Heading size="md">{el.title}</Heading>
+                      <Text>{el.publisher}</Text>
+                      <Flex>
+                        <Icon as={FaStar} color="yellow"></Icon>
+                        <Icon as={FaStar} color="yellow"></Icon>
+                        <Icon as={FaStar} color="yellow"></Icon>
+                        <Icon as={FaStar} color="yellow"></Icon>
+                        <Icon as={FaStarHalfAlt} color="yellow"></Icon>
                       </Flex>
-                    ) : (
-                      <Center>
-                        <Button
-                          size="sm"
-                          bg="#3E5962"
-                          color="white"
-                          _hover={{
-                            bg: "white",
-                            color: "#3E5962",
-                            border: "1px solid #3E5962",
-                          }}
-                        >
-                          Add To Cart
-                        </Button>
-                      </Center>
-                    )}
-                  </Box>
-                </GridItem>
-              </>
+                      <Text>{el.desc.substr(0, 143)}</Text>
+                      <Button
+                        size="md"
+                        bg="#3E5962"
+                        mt={3}
+                        color="white"
+                        _hover={{
+                          bg: "white",
+                          color: "#3E5962",
+                          border: "1px solid #3E5962",
+                        }}
+                      >
+                        Add To Cart
+                      </Button>
+                    </Flex>
+                  ) : (
+                    <Center>
+                      <Button
+                        size="sm"
+                        bg="#3E5962"
+                        color="white"
+                        _hover={{
+                          bg: "white",
+                          color: "#3E5962",
+                          border: "1px solid #3E5962",
+                        }}
+                      >
+                        Add To Cart
+                      </Button>
+                    </Center>
+                  )}
+                </Box>
+              </GridItem>
             );
           })}
       </Grid>
