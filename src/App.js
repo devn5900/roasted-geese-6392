@@ -4,15 +4,18 @@ import Navbar from "./components/Routes/Navbar";
 import { Box, Divider } from "@chakra-ui/react";
 import AllRoutes from "./components/Routes/AllRoutes";
 import Footer from "./components/Routes/Footer";
+import CartContextProvider from "./components/context/CartContextProvider";
 
 function App() {
   return (
-    <Box>
-      <Navbar />
-      <Divider />
-      <AllRoutes />
-      <Footer />
-    </Box>
+    <CartContextProvider>
+      <Box>
+        <Navbar />
+        <Divider />
+        <AllRoutes />
+        <Footer />
+      </Box>
+    </CartContextProvider>
   );
 }
 

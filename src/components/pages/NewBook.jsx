@@ -38,7 +38,7 @@ export default function NewBook({ head, page }) {
   }, []);
   const newBook = async () => {
     const res = await axios.get(
-      ` http://localhost:3000/books?_page=${page}&_limit=10`
+      ` https://frantic-red-knickers.cyclic.app/books?_page=${page}&_limit=10`
     );
     // console.log(res.data);
     setData(res.data);

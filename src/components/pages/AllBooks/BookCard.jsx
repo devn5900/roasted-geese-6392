@@ -17,8 +17,9 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import { FaStar } from "react-icons/fa";
+import { CartContext } from "../../context/CartContextProvider";
 const BookCard = ({
   title,
   price,
@@ -30,12 +31,13 @@ const BookCard = ({
   publisher,
   rating,
   year,
+  el,
 }) => {
   let rate = [];
   for (let i = 1; i <= rating; i++) {
     rate.push(FaStar);
   }
-
+  const { addToCartSuccess } = useContext(CartContext);
   return (
     <Card boxShadow="md" _hover={{ boxShadow: "xl" }}>
       <CardBody>
@@ -61,7 +63,7 @@ const BookCard = ({
         </Flex>
         <Stack>
           <Heading size="sm">
-            {title.split(" ").slice(1, 3).join(" ")}
+            {title.split(" ").slice(0, 2).join(" ")}
             <Badge ml="1" fontSize="0.8em" colorScheme="green">
               {lang}
             </Badge>
@@ -84,6 +86,10 @@ const BookCard = ({
               border: "1px solid #3E5962",
               bg: "none",
               color: "#3E5962",
+            }}
+            onClick={() => {
+              console.log(el);
+              addToCartSuccess({ type: "addToCart", payload: el });
             }}
           >
             Add To Cart
