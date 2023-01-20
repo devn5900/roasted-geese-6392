@@ -77,8 +77,10 @@ const BookHead = ({ head }) => {
       return `http://localhost:3000/books?_page=${page}&_limit=12&publisher=${filter.lang}`;
     } else if (filter.publisher && filter.year && filter.lang) {
       return `http://localhost:3000/books?_page=${page}&_limit=12&publisher=${filter.lang}&year=${filter.year}&lang=${filter.lang}`;
-    } else {
+    } else if (sort.by && sort.order) {
       return `http://localhost:3000/books?_page=${page}&_limit=12&_sort=${sort.by}&_order=${sort.order}`;
+    } else {
+      return `http://localhost:3000/books?_page=${page}&_limit=12`;
     }
   };
   const fetchShowBook = (page, search, sort, filter) => {
@@ -113,6 +115,7 @@ const BookHead = ({ head }) => {
 
   const sortByPrice = (e) => {
     // setSearchParam({ _sort: "", _order: "" });
+    searchParam.delete("q");
     setSort({ by: e.target.name, order: e.target.value });
     setSearchParam({
       _page: page,
@@ -122,6 +125,7 @@ const BookHead = ({ head }) => {
   };
 
   const filterBy = (e) => {
+    searchParam.delete("q");
     setFilter((prev) => {
       let f = { ...prev, [e.target.name]: e.target.value };
       let obj = {};
@@ -135,7 +139,6 @@ const BookHead = ({ head }) => {
     });
   };
   let obj1 = searchParam.entries();
-  console.log(obj1);
   return (
     <Box mt="1rem">
       <Box>
@@ -168,6 +171,7 @@ const BookHead = ({ head }) => {
                       type="search"
                       htmlSize={100}
                       onChange={searchBook}
+                      value={search}
                       borderRadius="none"
                       placeholder="Search by Title, Author, Keyword or ISBN"
                     />

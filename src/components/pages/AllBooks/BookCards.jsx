@@ -10,7 +10,7 @@ import {
   Tag,
   TagLabel,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import BookCard from "./BookCard";
 import BookSkeleton from "./BookSkeleton";
 
@@ -22,7 +22,7 @@ const BookCards = ({ data, pagination, page, updatePage }) => {
           return (
             <GridItem key={el.id}>
               {" "}
-              <BookCard {...el} />{" "}
+              <BookCard {...el} el={el} />{" "}
             </GridItem>
           );
         })}
