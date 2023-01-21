@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Center,
   Flex,
@@ -11,13 +10,22 @@ import {
   Stack,
   StackDivider,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React, { useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContextProvider";
+import { useToast } from "@chakra-ui/react";
+import { AuthContext } from "../../context/AuthContextProvider";
+import LoginPage from "../LoginSignup/LoginPage";
 
-const OrderSummary = ({ isElement }) => {
+const OrderSummary = ({ isElement, btnText, path }) => {
   const { totalPriceItem } = useContext(CartContext);
   const { totalPrice, itemCount } = totalPriceItem();
+  const toast = useToast();
+  const { isAuth } = useContext(AuthContext);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Card boxShadow="md" minW="sm" borderRadius="none">
       <CardHeader>
@@ -44,10 +52,23 @@ const OrderSummary = ({ isElement }) => {
           </Box>
           <Box>
             <Center>
-              <Button isDisabled={isElement <= 0} size="md" colorScheme="blue">
-                Order Now
-              </Button>
+              {isAuth ? (
+                <Link to={path}>
+                  <Button
+                    isDisabled={isElement <= 0}
+                    size="md"
+                    colorScheme="blue"
+                  >
+                    {btnText}
+                  </Button>
+                </Link>
+              ) : (
+                <Button onClick={onOpen} size="md" colorScheme="blue">
+                  Log in
+                </Button>
+              )}
             </Center>
+            <LoginPage isOpen={isOpen} onClose={onClose} />
           </Box>
         </Stack>
       </CardBody>

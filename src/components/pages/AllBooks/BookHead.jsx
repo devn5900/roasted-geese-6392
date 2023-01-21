@@ -134,11 +134,12 @@ const BookHead = ({ head }) => {
           obj[key] = prev[key];
         }
       }
-      setSearchParam({ _page: page, ...obj, [e.target.name]: e.target.value });
+      setSearchParam({ _page: 1, ...obj, [e.target.name]: e.target.value });
       return f;
     });
   };
   let obj1 = searchParam.entries();
+  console.log(obj1);
   return (
     <Box mt="1rem">
       <Box>
