@@ -55,7 +55,11 @@ const Cart = () => {
             </Flex>
           </Box>
           <Box>
-            <OrderSummary isElement={cartData.length} />
+            <OrderSummary
+              isElement={cartData.length}
+              btnText="Order Now"
+              path="/checkout"
+            />
           </Box>
         </Flex>
       </Box>

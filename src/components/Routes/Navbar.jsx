@@ -29,7 +29,7 @@ const Navbar = () => {
   // console.log(nav);
   return (
     <Box pb={2}>
-      <NavOffers msg=" Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
+      <NavOffers msg=" Special Offer 50% Off !" />
       <NavInfo />
       <NavIcon />
       <Flex>

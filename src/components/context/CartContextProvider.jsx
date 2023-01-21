@@ -4,8 +4,15 @@ import CartReducer from "../reducer/CartReducer";
 
 export const CartContext = createContext();
 const CartContextProvider = ({ children }) => {
-  const [cart, setCartDispatcher] = useReducer(CartReducer, []);
+  const [cart, setCartDispatcher] = useReducer(
+    CartReducer,
+    JSON.parse(localStorage.getItem("cart"))
+  );
   const toast = useToast();
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart) || []);
+  }, [cart]);
 
   const addToCartSuccess = ({ type, payload }) => {
     setCartDispatcher({ type, payload });

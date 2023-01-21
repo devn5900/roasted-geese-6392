@@ -25,7 +25,7 @@ import Login from "../pages/LoginSignup/Login";
 import Signup from "../pages/LoginSignup/Signup";
 import LoginSignup from "../pages/LoginSignup/Signup";
 const NavInfo = () => {
-  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const { isAuth, setIsAuth, signedupUser } = useContext(AuthContext);
   let text = {
     fontSize: "12px",
     fontWeight: "500",
@@ -134,7 +134,7 @@ const NavInfo = () => {
                       src="https://bit.ly/dan-abramov"
                       alt="Dan Abramov"
                     />
-                    <Text>Devesh Kumar Mishra</Text>
+                    <Text>{signedupUser.name}</Text>
                     <Button
                       onClick={logOut}
                       colorScheme="blue"
