@@ -19,7 +19,9 @@ const BookHead = ({ head }) => {
   const [year, setYear] = useState([]);
   const [showBook, setShowBook] = useState([]);
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:3000/books");
+    const res = await axios.get(
+      "https://frantic-red-knickers.cyclic.app/books"
+    );
     publish(res.data);
     lang(res.data);
     getYear(res.data);
@@ -68,19 +70,19 @@ const BookHead = ({ head }) => {
   }, [page, search, sort, filter]);
   const baseUrl = (page, search, sort, filter) => {
     if (search) {
-      return `http://localhost:3000/books?_page=${page}&_limit=12&q=${search}`;
+      return `https://frantic-red-knickers.cyclic.app/books?_page=${page}&_limit=12&q=${search}`;
     } else if (filter.publisher) {
-      return `http://localhost:3000/books?_page=${page}&_limit=12&publisher=${filter.publisher}`;
+      return `https://frantic-red-knickers.cyclic.app/books?_page=${page}&_limit=12&publisher=${filter.publisher}`;
     } else if (filter.year) {
-      return `http://localhost:3000/books?_page=${page}&_limit=12&publisher=${filter.year}`;
+      return `https://frantic-red-knickers.cyclic.app/books?_page=${page}&_limit=12&publisher=${filter.year}`;
     } else if (filter.lang) {
-      return `http://localhost:3000/books?_page=${page}&_limit=12&publisher=${filter.lang}`;
+      return `https://frantic-red-knickers.cyclic.app/books?_page=${page}&_limit=12&publisher=${filter.lang}`;
     } else if (filter.publisher && filter.year && filter.lang) {
-      return `http://localhost:3000/books?_page=${page}&_limit=12&publisher=${filter.lang}&year=${filter.year}&lang=${filter.lang}`;
+      return `https://frantic-red-knickers.cyclic.app/books?_page=${page}&_limit=12&publisher=${filter.lang}&year=${filter.year}&lang=${filter.lang}`;
     } else if (sort.by && sort.order) {
-      return `http://localhost:3000/books?_page=${page}&_limit=12&_sort=${sort.by}&_order=${sort.order}`;
+      return `https://frantic-red-knickers.cyclic.app/books?_page=${page}&_limit=12&_sort=${sort.by}&_order=${sort.order}`;
     } else {
-      return `http://localhost:3000/books?_page=${page}&_limit=12`;
+      return `https://frantic-red-knickers.cyclic.app/books?_page=${page}&_limit=12`;
     }
   };
   const fetchShowBook = (page, search, sort, filter) => {

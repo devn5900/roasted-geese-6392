@@ -9,7 +9,9 @@ const CartReducer = (cart, action) => {
       return [...cart];
     case "updateQuantity":
       return [...action.payload];
-
+    case "reset":
+      return [];
+    default:
       return cart;
   }
 };

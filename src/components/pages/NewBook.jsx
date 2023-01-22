@@ -9,14 +9,17 @@ import {
   color,
   Button,
 } from "@chakra-ui/react";
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import axios from "axios";
 import { FaArrowCircleLeft } from "react-icons/fa";
+import { CartContext } from "../context/CartContextProvider";
 
 export default function NewBook({ head, page }) {
   const [data, setData] = useState([]);
+  const { addToCartSuccess } = useContext(CartContext);
+
   const settings = {
     className: "",
     centerMode: false,
@@ -57,23 +60,26 @@ export default function NewBook({ head, page }) {
             return (
               <div key={i + 1}>
                 <Box mb="1rem">
-                  <Link to="/login">
+                  <Link to={`/bookdetails/${el.id}`}>
                     <Image src={el.image} fit />
-                    <Center>
-                      <Button
-                        size="sm"
-                        bg="#3E5962"
-                        color="white"
-                        _hover={{
-                          bg: "white",
-                          color: "#3E5962",
-                          border: "1px solid #3E5962",
-                        }}
-                      >
-                        Add To Cart
-                      </Button>
-                    </Center>
                   </Link>
+                  <Center>
+                    <Button
+                      size="sm"
+                      bg="#3E5962"
+                      onClick={() => {
+                        addToCartSuccess({ type: "addToCart", payload: el });
+                      }}
+                      color="white"
+                      _hover={{
+                        bg: "white",
+                        color: "#3E5962",
+                        border: "1px solid #3E5962",
+                      }}
+                    >
+                      Add To Cart
+                    </Button>
+                  </Center>
                 </Box>
               </div>
             );

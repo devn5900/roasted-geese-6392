@@ -11,6 +11,7 @@ import {
   InputGroup,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
@@ -23,6 +24,8 @@ const CheckoutForm = () => {
   const { isAuth } = useContext(AuthContext);
   const [cartCheck, setCartCheck] = useState([]);
   const [err, setErr] = useState(false);
+  const [order, setOrder] = useState(true);
+  const toast = useToast();
   const [userDetails, setUserDetails] = useState({
     fname: "",
     lname: "",
@@ -31,9 +34,7 @@ const CheckoutForm = () => {
     phone: "",
     pinCode: "",
   });
-  if (!isAuth) {
-    // return <Navigate to="/" />;
-  }
+
   useEffect(() => {
     setCartCheck(cart);
   }, [cart]);
@@ -51,6 +52,9 @@ const CheckoutForm = () => {
 
     return false;
   };
+  if (!isAuth) {
+    return <Navigate to="/" />;
+  }
   const inputDetails = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
   };
@@ -59,16 +63,26 @@ const CheckoutForm = () => {
     if (!errorCheck()) {
       localStorage.setItem("shippingDetails", JSON.stringify(userDetails));
       setErr(false);
-      setUserDetails({
-        fname: "",
-        lname: "",
-        address: "",
-        city: "",
-        phone: "",
-        pinCode: "",
+      setOrder(false);
+      // setUserDetails({
+      //   fname: "",
+      //   lname: "",
+      //   address: "",
+      //   city: "",
+      //   phone: "",
+      //   pinCode: "",
+      // });
+      return toast({
+        title: "Address Saved !",
+        description: "",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
       });
     } else {
       setErr(true);
+      setOrder(true);
     }
   };
   return (
@@ -96,6 +110,7 @@ const CheckoutForm = () => {
                       placeholder="First Name"
                       onChange={inputDetails}
                       name="fname"
+                      isDisabled={!order}
                       value={userDetails.fname}
                     />
                   </FormControl>
@@ -108,28 +123,31 @@ const CheckoutForm = () => {
                       placeholder="Last Name"
                       onChange={inputDetails}
                       name="lname"
+                      isDisabled={!order}
                       value={userDetails.lname}
                     />
                   </FormControl>
                 </Box>
               </HStack>
-              <FormControl id="street" isRequired>
+              <FormControl id="street">
                 <FormLabel>Street Address</FormLabel>
                 <Input
                   type="text"
                   placeholder="Address"
+                  isDisabled={!order}
                   onChange={inputDetails}
                   name="address"
                   value={userDetails.address}
                 />
               </FormControl>
-              <FormControl id="city" isRequired>
+              <FormControl id="city">
                 <FormLabel>City</FormLabel>
                 <InputGroup>
                   <Input
                     type="text"
                     placeholder="City"
                     onChange={inputDetails}
+                    isDisabled={!order}
                     name="city"
                     value={userDetails.city}
                   />
@@ -137,7 +155,7 @@ const CheckoutForm = () => {
               </FormControl>
               <HStack>
                 <Box>
-                  <FormControl id="pinCode" isRequired>
+                  <FormControl id="pinCode">
                     <FormLabel>Pin Code</FormLabel>
                     <InputGroup>
                       <Input
@@ -146,12 +164,13 @@ const CheckoutForm = () => {
                         onChange={inputDetails}
                         name="pinCode"
                         value={userDetails.pinCode}
+                        isDisabled={!order}
                       />
                     </InputGroup>
                   </FormControl>
                 </Box>
                 <Box>
-                  <FormControl id="phone" isRequired>
+                  <FormControl id="phone">
                     <FormLabel>Phone Number</FormLabel>
                     <InputGroup>
                       <Input
@@ -159,6 +178,7 @@ const CheckoutForm = () => {
                         placeholder="Phone Number"
                         onChange={inputDetails}
                         name="phone"
+                        isDisabled={!order}
                         value={userDetails.phone}
                       />
                     </InputGroup>
@@ -170,6 +190,7 @@ const CheckoutForm = () => {
                 <Button
                   loadingText="Submitting"
                   size="lg"
+                  isDisabled={!order}
                   bg={"green.500"}
                   color={"white"}
                   _hover={{
@@ -187,14 +208,10 @@ const CheckoutForm = () => {
           <Box>
             <OrderSummary
               isElement={
-                cartCheck.length == 0
-                  ? cartCheck.length
-                  : !err
-                  ? cartCheck.length
-                  : 0
+                cartCheck.length > 0 ? (order ? 0 : cartCheck.length) : 0
               }
               btnText="Submit Order"
-              path="/placedOrderInfo"
+              path="/payment"
             />
           </Box>
         </Flex>

@@ -15,6 +15,7 @@ import BookCard from "./BookCard";
 import BookSkeleton from "./BookSkeleton";
 
 const BookCards = ({ data, pagination, page, updatePage }) => {
+  console.log(pagination);
   return (
     <Box p="1rem">
       <Grid templateColumns="repeat(4, 1fr)" gap={4}>
@@ -45,7 +46,7 @@ const BookCards = ({ data, pagination, page, updatePage }) => {
                 {page}
               </Button>
               <Button
-                isDisabled={Number(page) == Number(pagination) / 10}
+                isDisabled={Number(page) == Math.floor(Number(pagination) / 10)}
                 colorScheme="teal"
                 onClick={() => {
                   updatePage(1);
