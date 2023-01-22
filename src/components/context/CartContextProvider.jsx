@@ -6,7 +6,7 @@ export const CartContext = createContext();
 const CartContextProvider = ({ children }) => {
   const [cart, setCartDispatcher] = useReducer(
     CartReducer,
-    JSON.parse(localStorage.getItem("cart"))
+    JSON.parse(localStorage.getItem("cart")) || []
   );
   const toast = useToast();
 

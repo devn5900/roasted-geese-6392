@@ -29,7 +29,7 @@ const NavIcon = () => {
             <Icon as={FaCartPlus} fontSize="2rem" color="#3E5962"></Icon>
           </Link>
           <Badge position="absolute" bg="#3E5962" color="white">
-            {cart.length}
+            {cart ? cart?.length : 0}
           </Badge>
         </Box>
       </Flex>
