@@ -13,7 +13,9 @@ const CartContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart) || []);
   }, [cart]);
-
+  const resetCart = () => {
+    setCartDispatcher({ type: "reset" });
+  };
   const addToCartSuccess = ({ type, payload }) => {
     setCartDispatcher({ type, payload });
     return toast({
@@ -103,6 +105,7 @@ const CartContextProvider = ({ children }) => {
         decreaseQuantityCart,
         deleteCartItem,
         totalPriceItem,
+        resetCart,
       }}
     >
       {children}

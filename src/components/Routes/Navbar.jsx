@@ -42,19 +42,23 @@ const Navbar = () => {
                 <MenuButton trigger="hover">{el?.label}</MenuButton>
               </Link>
               <Spacer />
-              <Center>
-                <Divider
-                  orientation="vertical"
-                  variant={"solid"}
-                  borderColor="black"
-                  borderWidth="2"
-                  colorScheme={"blackAlpha"}
-                />
-              </Center>
+              {nav.length - 1 != i ? (
+                <Center>
+                  <Divider
+                    orientation="vertical"
+                    variant={"solid"}
+                    borderColor="black"
+                    borderWidth="2"
+                    colorScheme={"blackAlpha"}
+                  />
+                </Center>
+              ) : (
+                ""
+              )}
               <Spacer />
               <MenuDivider />
 
-              <MenuList borderRadius="none" p={2}>
+              <MenuList boxShadow="md" borderRadius="none" p={2}>
                 <Flex>
                   {el?.data?.map((chil, j) => {
                     return (
@@ -75,7 +79,6 @@ const Navbar = () => {
             </Menu>
           );
         })}
-        <Spacer />
       </Flex>
     </Box>
   );

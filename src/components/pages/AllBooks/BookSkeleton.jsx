@@ -18,7 +18,7 @@ import React from "react";
 const BookSkeleton = () => {
   return (
     <Flex alignItems="center">
-      <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+      <Grid templateColumns="repeat(4, 1fr)" gap={4}>
         <GridItem>
           <Card boxShadow="md">
             <CardBody>
